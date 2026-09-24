@@ -8,4 +8,4 @@ with project("exo4-la_dependance_retiree"):
     location("exo4-la_dependance_retiree")
     files(["src/**.cpp", "include/**.hpp"])
 
-    dependson(["exo3-les_deux_configurations"])
+    """ dependson(["exo3-les_deux_configurations"]) """
