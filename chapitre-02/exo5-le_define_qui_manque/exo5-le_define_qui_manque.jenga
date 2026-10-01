@@ -1,0 +1,10 @@
+
+from jenga import *
+
+# Project: exo5-le_define_qui_manque
+with project("exo5-le_define_qui_manque"):
+    consoleapp()
+    language("C++")
+    location("exo5-le_define_qui_manque")
+    files(["src/**.cpp", "include/**.hpp"])
+    """  includedirs(["include"]) """ 
