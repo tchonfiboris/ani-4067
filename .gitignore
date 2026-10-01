@@ -1,8 +1,8 @@
 Build/
+NkentseuKit/
+
+
 *.lib
 *.dll
 *.o
 *.obj
-NkentseuKit/
-**/NkentseuKit/
-**/include/NKentseuKit/
