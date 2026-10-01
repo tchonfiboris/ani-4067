@@ -16,7 +16,7 @@ int main() {
             std::cout << "SAISIR" << std::endl;
             ++sansGarde;
         } else if (evenement == "repete") {
-            std::cout << "repete : RIEN" << std::endl;
+            std::cout << "RIEN" << std::endl;
             ++sansGarde;
         } else if (evenement == "relache") {
             std::cout << "LACHER" << std::endl;
