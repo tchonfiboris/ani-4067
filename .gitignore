@@ -4,3 +4,5 @@ Build/
 *.o
 *.obj
 NkentseuKit/
+**/NkentseuKit/
+**/include/NKentseuKit/
