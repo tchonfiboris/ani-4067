@@ -1,0 +1,12 @@
+Lignes avant les fonctions : [A COMPLETER : nombre de lignes de ma
+salle avant la reecriture, a compter dans mon propre code]
+
+Lignes apres : [A COMPLETER : nombre de lignes de ma salle apres la
+reecriture avec PoserAuSol et PoserSurTable, a compter dans mon propre code]
+
+L'erreur que la fonction m'evite : oublier de diviser la hauteur par deux.
+Le cube du moteur est centre sur son origine, donc poser un objet a la 
+hauteur sy met sa moitie basse sous le sol. Le centre doit etre a sy / 2, ou a H + sy / 2 sur
+une table. Sans fonction, ce calcul est recopie a la main pour chaque objet et
+il suffit d'en rater un pour qu'un mur flotte ou qu'un objet soit enterre, sans
+aucun message. Avec la fonction, le calcul est ecrit une seule fois
