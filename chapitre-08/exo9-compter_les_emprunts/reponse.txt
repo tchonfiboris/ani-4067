@@ -1,0 +1,17 @@
+La relation : chaque emprunt réussi doit être suivi d'exactement une libération, donc REUSSIES doit être égal 
+à LIBERATIONS et l'écart doit rester à 0 (ou à 1 au plus pendant qu'une trame est en cours de dessin). 
+Les emprunts refusés n'entrent pas dans cette relation : un refus ne prend aucune image, il n'y a donc rien 
+à rendre.
+
+Mes trois nombres : sur l'exécution de l'énoncé (10 trames, une chaîne de 3 images), REUSSIES vaut 5, REFUSEES vaut 
+6 et LIBERATIONS vaut 4, soit un ECART de 1. Cet écart de 1 est le signe qu'une image n'a jamais été rendue. Les 6 
+refus se répartissent en 1 refus normal du second emprunt de la trame 3 (DOUBLE, sans conséquence puisque l'image 
+est rendue ensuite) et 5 refus de trames BLOQUEE, de la trame 6 à la trame 10. Ces chiffres sont ceux de la simulation, 
+pas ceux d'une minute de ma propre boucle de rendu.
+
+Le chemin qui fuit : c'est la trame 5, de type sortie. Elle réussit son emprunt, puis quitte la fonction avant 
+l'appel de libération, par exemple par un return anticipé. L'image reste empruntée, donc tous les emprunts 
+suivants sont refusés : les trames 6 à 10 sont BLOQUEE et plus aucune image n'est dessinée. La première fuite 
+est la trame 5, et c'est elle qu'il faut chercher, pas la trame 6 où l'on voit le blocage. Pour que chaque chemin 
+de sortie rende l'image, il faut libérer sur tous les chemins, par exemple avec un objet qui appelle la libération 
+dans son destructeur.

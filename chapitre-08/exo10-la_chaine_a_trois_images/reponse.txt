@@ -1,0 +1,18 @@
+Mes trente lignes : voici les trente trames du modèle avec une chaîne de trois images (trame, image employée). Elles 
+viennent du programme trois.cpp (scénario 3 2 30), pas d une exécution de ma propre salle, que je n ai pas pu faire 
+tourner ici :
+
+
+Le minimum d images : avec L trames de lecture par le compositeur, une trame peint sans conflit 
+si l image qu elle prend n a pas été soumise depuis moins de L trames. Comme l image revient 
+tous les n tours, il faut n supérieur à L, donc n égal à L + 1 au minimum. Les résultats le 
+confirment : avec L = 1, une image donne 5 conflits sur 6 trames et deux images en donnent 0 ; 
+avec L = 2, deux images donnent encore 4 conflits et trois images en donnent 0. Avec L = 0 
+une seule image suffit.
+
+Sur le simulateur : d après le modèle, le cycle de trois images 0, 1, 2, 0, 1, 2 apporte 
+la marge nécessaire quand le compositeur garde chaque image deux trames : aucune trame ne 
+peint une image encore lue (CONFLITS 3 2 0). Si le simulateur lit chaque image une seule trame, 
+deux images suffisent déjà et la troisième ne change rien à ce que l oeil voit : elle ne sert 
+qu à absorber une trame de retard. Je n ai pas observé le simulateur lui-même : ce paragraphe 
+est une conclusion du modèle, à confirmer par vos propres mesures.

@@ -1,0 +1,29 @@
+Images paires et impaires : avec deux images, l'oeil ne voit pas le même retard selon la trame. Aux trames 
+impaires (mode D), l'index est lu après la libération et désigne l'image qui vient d'être peinte : la trame 
+montrée est la trame courante (trame 3 : position 30, trame 5 : position 50). Aux trames paires (mode P), 
+l'index est lu avant la libération et désigne l'image de la trame d'avant : la trame montrée est la trame 
+précédente, donc la même image que la trame impaire qui précède (trame 4 : position 30 encore). Les sauts 
+alternent donc entre 0 et 20 : SAUT MIN 0, SAUT MAX 20, TREMBLE OUI. La caméra avance de 10 mm par trame, 
+mais l'oeil voit une position figée une trame sur deux, puis un bond de 20 mm.
+
+Avec une seule image : la chaîne n'a qu'un emplacement, qui contient toujours la trame qui vient d'être peinte, 
+que l'on lise l'index avant ou après la libération ((0 + 1 - 1) % 1 = 0 dans les deux cas). Le défaut disparaît 
+et rien ne le signale. Sortie obtenue avec n égal à 1 :
+1 10 -
+2 20 10
+3 30 10
+4 40 10
+5 50 10
+6 60 10
+7 70 10
+8 80 10
+SAUT MIN 10
+SAUT MAX 10
+TREMBLE NON
+Chaque saut vaut 10, comme le pas de la caméra : le mouvement est régulier, et un test fait avec 
+une seule image ne verrait jamais l'erreur.
+
+La bonne lecture : il faut soumettre l'image que l'on vient de peindre, pas celle de la trame d'avant. 
+On peut lire l'index emprunté (mode A), ou lire l'index de la dernière image relâchée après la libération 
+(mode D), c'est-à-dire (prochaine + n - 1) % n calculé une fois que prochaine a avancé. La lecture avant 
+la libération (mode P) donne l'image de la trame précédente dès que la chaîne compte au moins deux images.
