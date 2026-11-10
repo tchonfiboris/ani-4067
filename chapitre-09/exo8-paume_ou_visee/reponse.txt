@@ -1,0 +1,24 @@
+La distance :
+Dans le repère de la tête, la paume droite est en (180, -300, -250) et la visée droite en (180, -250, -400). 
+Elles ont le même x, la visée est 50 mm plus haut et 150 mm plus en avant, donc la distance vaut racine de 
+(50² + 150²) = racine de 25000, soit environ 158,1 mm : c'est le ECART 158 du résultat. La rotation du lacet 
+ne change pas une distance, donc cet écart est le même pour les trois têtes. Il dépasse le rayon de saisie de 
+150 mm, et on le voit dans le résultat : pour la tête 1, la paume saisit l'objet 1 et la visée saisit l'objet 2, 
+deux objets différents pour une même main. Tenir un objet par la visée le fait donc flotter à 158 mm de la paume, 
+devant la main.
+
+L'angle :
+Dans ce simulateur, l'angle entre les deux directions avant vaut 0 degré. Les deux poses n'ont que des positions 
+dans le repère de la tête, et aucune rotation propre : leur orientation est celle de la tête, qui est droite, 
+et leur avant est le même axe z négatif tourné du même lacet. La visée est seulement décalée de 50 mm vers le 
+haut et de 150 mm vers l'avant, elle n'est pas inclinée. Sur un vrai casque, cela ne vaudrait pas la même chose : 
+le runtime donne à la paume l'orientation de la poignée et à la visée celle du rayon, et ces deux orientations 
+diffèrent généralement d'une inclinaison, dont la valeur dépend du modèle de manette. Je ne peux pas donner ce 
+nombre ici, il faudrait le lire sur le casque.
+
+Pour pointer :
+Il faut la visée, pas la paume. La visée est faite pour pointer : son origine est le point d'où part le rayon, et 
+son avant est la direction pointée. La paume est faite pour tenir. Pointer avec elle donne un rayon qui part 
+du mauvais endroit, 50 mm plus bas et 150 mm en arrière dans ce simulateur, et qui sur un vrai casque serait en 
+plus de travers à cause de l'inclinaison dont je parle plus haut. Pour la tête 1, le rayon part de la visée droite 
+en (180, 1450, -400) et va vers -z, alors que la paume est en (180, 1400, -250).

@@ -1,0 +1,24 @@
+Ce qui change :
+Sur un vrai casque, seule la table changerait : le morceau qui associe un usage à une commande, 
+c'est-à-dire les lignes `USAGE COMMANDE` lues dans `rejouer` et rangées dans `Table`. Au lieu de 
+`SELECT SOURIS_G` ou `SELECT ESPACE`, ce serait la liaison de `SELECT` avec le bouton du contrôleur 
+du casque, et ce que j'appelle les commandes tenues viendrait de l'état lu après la synchronisation, 
+au lieu des lignes `k c1 ... ck`. Le reste ne bouge pas : les actions déclarées une seule fois avec 
+leur nom et leur usage, la règle « appuyée maintenant et pas à l'image d'avant », la liste des actions 
+inactives et la comparaison des deux séries d'images.
+
+Aucun nom de bouton :
+Dans mon code, une action n'est qu'un nom et un usage (`struct Action`). La seule ligne qui rapproche 
+une action d'une commande est `appuyee[i] = tenues.count(table[actions[i].usage])` : elle cherche dans 
+la table la commande de l'usage, puis regarde si cette chaîne est dans l'ensemble des commandes tenues. 
+Les chaînes comparées viennent toutes de l'entrée, jamais d'un texte écrit dans le code. J'ai cherché 
+`SOURIS`, `ESPACE` et `TAB` dans `correspondance.cpp` : il n'y a aucun nom de bouton, le seul résultat 
+est le mot `TABLE` de la ligne affichée `TABLE i`. Le résultat le confirme : avec des commandes différentes 
+(`SOURIS_G` et `SOURIS_D` d'un côté, `ESPACE` et `E` de l'autre), les deux tables donnent les mêmes images, 
+et le programme affiche `IDENTIQUES OUI`.
+
+L'action inactive :
+L'action `saisir_g` a l'usage `GRAB_LEFT`, que ni l'une ni l'autre table ne lie. Le programme affiche 
+`INACTIVE saisir_g` pour chacune des deux tables, ne la teste jamais dans les images et ne la signale 
+donc jamais comme appuyée. C'est un cas normal et pas une erreur : une action sans liaison reste inactive 
+et se lit comme un bouton relâché, et le code doit continuer à fonctionner sans elle.
