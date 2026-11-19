@@ -1,0 +1,18 @@
+Négligeable : un écart entre la pose du rendu et la pose de la fin de trame est négligeable quand 
+le lacet reste sous un degré et que la position bouge de quelques millimètres seulement, car l'œil 
+ne voit pas la différence. Sur l'exemple, les moyennes sont de 5 mm et de 770 millièmes de degré (0,77 degré) : 
+en moyenne, l'écart est sous le seuil. Mais l'image 3 montre un écart de 13 mm et de 2,2 degrés : cette image-là 
+ne serait pas négligeable, et la moyenne cache ce cas.
+
+Seuil : le lacet est en millièmes de degré, et le temps d en millisecondes, donc une vitesse de v 
+degrés par seconde donne un écart de v × d millièmes de degré. Avec d = 11 ms, l'écart dépasse un degré, 
+soit 1000 millièmes, quand v × 11 > 1000, c'est-à-dire v > 1000 / 11, soit v > 90,9 degrés par seconde environ. 
+À 91 degrés par seconde, l'écart vaut 91 × 11 = 1001 millièmes de degré, juste au-dessus du seuil. La vitesse 
+moyenne de l'exemple est de 70 degrés par seconde : 70 × 11 = 770 millièmes de degré, donc en dessous.
+
+Ce que corrige le compositeur : le compositeur compare la pose avec laquelle l'image a été dessinée, 
+portée par la couche, à la pose de la tête au moment de l'affichage. Il déforme l'image pour compenser 
+cet écart : c'est la reprojection. Elle corrige bien la rotation de la tête. Pour la translation, elle ne 
+peut que l'approcher, parce que le décalage dépend de la profondeur de chaque objet et qu'une image seule ne 
+la donne pas. Cela ne marche que si la couche porte la bonne pose, celle du rendu : si on y met la pose relue 
+à la fin de trame, le compositeur croit qu'il n'y a plus rien à corriger.
