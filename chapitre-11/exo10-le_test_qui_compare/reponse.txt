@@ -1,0 +1,21 @@
+Ce qui varie :
+Si l'instant provenait de l'horloge systeme ou de l'heure reelle, les valeurs 
+d'horodatage changeraient d'une execution a l'autre selon l'instant de lancement, 
+la charge du systeme ou l'ordonnancement du processeur. Une meme image n'aurait plus 
+le meme timestamp ni les memes intervalles entre executions, ce qui empecherait une 
+comparaison deterministe octet par octet des traces produites.
+
+Le remede :
+A la place de l'horloge reelle, le test impose une progression scriptee de la 
+position, du lacet et de l'instant : la periode est calculee une fois a partir 
+de la cadence (1000000000 / hz, avec repli sur 72 si hz <= 1), la tete avance 
+selon les pas fixes dk et vx, et l'instant de chaque image t vaut exactement t * p. 
+Chaque execution repart ainsi d'un etat initial identique et suit la meme sequence 
+deterministe.
+
+La preuve :
+Pour prouver que deux backends calculent la meme chose, on rejoue exactement la 
+meme entree scriptee sur chacun d'eux et on compare leurs sorties ligne par 
+ligne ou octet par octet. Si les deux backends produisent les memes coordonnees 
+d'yeux gauche et droit et les memes instants pour chaque image t, on etablit 
+factuellement l'equivalence de leurs calculs de pose et de suivi sur ce scenario.

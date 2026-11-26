@@ -1,0 +1,26 @@
+Le defaut neutre :
+Une application ecrite pour le casque appelle les methodes de l'interface commune 
+sans avoir besoin de savoir si le backend reel est materiel ou simule. Comme les 
+methodes propres au casque (SEUL_A) possedent deja une implementation par defaut 
+neutre dans l'interface commune (par exemple des exigences Vulkan vides et vraies 
+ou une liaison sans effet), le code applicatif compile et s'execute tel quel sur le 
+simulateur sans branchement conditionnel ni erreur de liaison.
+
+Les crochets de test :
+DebugSetHead permet de placer directement la pose de la tete a une valeur choisie 
+par le test, et DebugPushSample injecte un echantillon de suivi horodate sans passer 
+par la lecture de l'horloge materielle afin de rejouer des scenarios deterministes 
+et reproductibles. Le vrai casque ne peut pas offrir ces crochets de la meme maniere 
+car ses poses et horodatages proviennent de capteurs physiques, de l'horloge du systeme 
+ou du runtime materiel en temps reel, et qu'exposer une injection arbitraire en production 
+compromettrait la coherence et la securite du suivi.
+
+L'image :
+Les methodes SEUL_A liees a la carte graphique ou aux images du casque sont 
+GetVulkanRequirements, GetVulkanPhysicalDevice, BindVulkan, CreateHmdSwapchains, 
+SubmitEyes, GetDisplayRefreshRates, GetDisplayRefreshRate, RequestDisplayRefreshRate 
+et GetVisibilityMask (ainsi que GetPerfMetrics pour les mesures de performance materielle). 
+Le simulateur n'en a pas besoin car il ne pilote pas de chaine d'echange Vulkan ni d'ecran 
+physique de casque : l'affichage et la simulation s'appuient sur le rendu standard de 
+l'application ou sur un contexte synthetique sans gestion directe de swapchain ou de 
+frequence de dalle HMD.

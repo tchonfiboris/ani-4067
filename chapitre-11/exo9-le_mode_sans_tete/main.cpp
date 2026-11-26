@@ -24,7 +24,7 @@ int main() {
     const long long period = 1000000000LL / hz;
 
     std::string line;
-    std::getline(std::cin, line); // consomme la fin de ligne de hz
+    std::getline(std::cin, line);
 
     long long lacet = 0;
     long long tangage = 0;

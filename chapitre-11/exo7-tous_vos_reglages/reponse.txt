@@ -1,0 +1,24 @@
+Le reglage fantome :
+La personne qui regle depthZeroToOne croit que modifier ce champ agit sur la 
+plage de profondeur (0 a 1) utilisee par le rendu ou le casque. En realite, 
+le champ est declare mais jamais lu (LIT) dans le code releve : sa valeur reste 
+donc sans effet reel et le comportement effectif ne change pas.
+
+La lecture cachee :
+Si un menu modifie le champ openXrLoaderPath alors qu'un backend lit lui-meme 
+directement la variable d'environnement NK_XR_OPENXR_LOADER (GETENV) sans passer 
+par le champ, le reglage du menu est court-circuite. Le backend continue d'utiliser 
+la valeur issue de l'environnement (ou son absence) et ignore la modification demandee 
+dans le champ, ce qui cree un ecart silencieux entre l'interface de configuration et 
+l'execution reelle.
+
+Le menu :
+Une personne casque sur la tete pourrait effectivement changer 4 reglages classes 
+MENU sur les 9 reglages releves : renderScale, halfRate, submitDepthLayer, 
+listExtensions et displayHz apparaissent avec des sources de modification (ECRIT ou ENV) 
+et une lecture (LIT), mais seuls 4 d'entre eux sont classes MENU dans ce releve (renderScale, 
+halfRate, submitDepthLayer et displayHz, tandis que listExtensions figure aussi dans les donnees). 
+Pour les autres reglages, il faudrait relier depthZeroToOne a une lecture effective si le comportement 
+est voulu ou le retirer s'il est obsolete, centraliser la lecture d'environnement de openXrLoaderPath 
+et shotFrame dans la fonction ENV afin qu'elles passent par le champ plutot que par un GETENV cache, 
+et exposer ou brancher les reglages CONSTANTE si une modification a l'execution est necessaire.
